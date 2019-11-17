@@ -6,10 +6,12 @@ import router from './routes'
 
 import './config/mongoose'
 
+// * Enable Request middleware to accept custom key:value
 declare global {
   namespace Express {
     interface Request {
-      [key: string]: any
+      device_token: string | string[]
+      subscription: string[]
     }
   }
 }
