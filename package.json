@@ -1,7 +1,7 @@
 {
-  "name": "app-engine",
+  "name": "server-user",
   "version": "1.0.0",
-  "description": "Orchestrator for MOLE servers",
+  "description": "Micro service USER for MOLE",
   "main": "dist/bin/http.js",
   "scripts": {
     "test": "NODE_ENV=test mocha -r ts-node/register src/tests/**/*.test.ts --exit",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Promo-Aggregation/app-engine.git"
+    "url": "git+https://github.com/Promo-Aggregation/server-user.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tigor Lazuardi, Kevin Anantha, Audrick",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Promo-Aggregation/app-engine/issues"
+    "url": "https://github.com/Promo-Aggregation/server-user/issues"
   },
-  "homepage": "https://github.com/Promo-Aggregation/app-engine#readme",
+  "homepage": "https://github.com/Promo-Aggregation/server-user#readme",
   "devDependencies": {
     "@types/chai": "^4.2.5",
     "@types/cors": "^2.8.6",
