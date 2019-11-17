@@ -8,7 +8,7 @@ import app from '../app'
 const expect = chai.expect
 chai.use(chaiHttp)
 
-describe.only('User Login Testing', function() {
+describe('User Login Testing', function() {
   this.timeout(10000)
   const userData = { device_token: '12345' }
   before(() => User.create(userData))
@@ -17,7 +17,7 @@ describe.only('User Login Testing', function() {
   it('Success User Login', (done) => {
     chai
       .request(app)
-      .post('/users/login')
+      .post('/login')
       .send(userData)
       .end((err, res) => {
         expect(res).to.have.status(200)
@@ -38,7 +38,7 @@ describe.only('User Login Testing', function() {
     const wrongData = { device_token: '98765' }
     chai
       .request(app)
-      .post('/users/login')
+      .post('/login')
       .send(wrongData)
       .end((err, res) => {
         expect(res).to.have.status(404)

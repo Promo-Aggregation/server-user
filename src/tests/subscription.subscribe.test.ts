@@ -34,4 +34,38 @@ describe('Subscription Subscribe Test', function() {
         done()
       })
   })
+
+  it('Fails subscribe - Token not set', function(done) {
+    chai
+      .request(app)
+      .put('/subscribe')
+      .send(['dana', 'asdkjfalksdjf'])
+      .end((err, res) => {
+        expect(err).to.be.null
+        expect(res).to.have.status(400)
+        const { body } = res
+        expect(body).to.be.an('object')
+        expect(body).to.have.property('message')
+        expect(res.body.message).to.be.a('string')
+        expect(res.body.message).to.include('token')
+        done()
+      })
+  })
+  it('Fails subscribe - Wrong token', function(done) {
+    chai
+      .request(app)
+      .put('/subscribe')
+      .send(['dana', 'asdkjfalksdjf'])
+      .set({ device_token: '98765' })
+      .end((err, res) => {
+        expect(err).to.be.null
+        expect(res).to.have.status(401)
+        const { body } = res
+        expect(body).to.be.an('object')
+        expect(body).to.have.property('message')
+        expect(res.body.message).to.be.a('string')
+        expect(res.body.message).to.match(/device/i)
+        done()
+      })
+  })
 })

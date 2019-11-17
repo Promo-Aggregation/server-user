@@ -4,6 +4,8 @@ import morgan from 'morgan'
 import errorHandler from './middleware/errorHandler'
 import router from './routes'
 
+import './config/mongoose'
+
 const app = express()
 
 app.use(cors())

@@ -1,12 +1,24 @@
 const errorHandler = (err: any, req: any, res: any, next: Function) => {
-  if (err.isAxiosError) {
-    res.status(err.response.status).send(err.response.data)
-  } else {
-    const status = err.status || 500
-    const message = err.message || 'Something unpredictable happened in the server'
+  let status
+  let message
 
-    res.status(status).send({ message })
+  switch (err.name) {
+    case 'MongoError':
+      if (err.code === 11000) {
+        status = 400
+        message = `device_token must be unique`
+      } else {
+        status = 500
+        message = 'Something happened in the database'
+      }
+      break
+    default:
+      status = err.status || 500
+      message = err.message || 'Internal Server Error'
+      break
   }
+
+  res.status(status).send({ message })
 }
 
 export default errorHandler

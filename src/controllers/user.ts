@@ -14,6 +14,7 @@ class UserController {
   static async login(req: any, res: any, next: Function) {
     try {
       const { device_token } = req.body
+      if (!device_token) return next({ status: 400, message: 'Please send device token' })
       const user: IUserModel = await User.findOne({ device_token })
       if (user) {
         res.status(200).json(user)

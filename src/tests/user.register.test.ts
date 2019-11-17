@@ -17,7 +17,7 @@ describe('User Register Testing', function() {
     const userData = { device_token: '98765' }
     chai
       .request(app)
-      .post('/users/register')
+      .post('/register')
       .send(userData)
       .end((err, res) => {
         expect(res).to.have.status(201)
@@ -32,13 +32,14 @@ describe('User Register Testing', function() {
     const userData = { device_token: '98765' }
     chai
       .request(app)
-      .post('/users/register')
+      .post('/register')
       .send(userData)
       .end((err, res) => {
         expect(res).to.have.status(400)
         expect(res.body).to.be.an('object')
         expect(res.body).to.have.property('message')
         expect(res.body.message).to.be.a('string')
+        expect(res.body.message).to.match(/device_token/i)
         done()
       })
   })
