@@ -7,7 +7,9 @@
     "test": "NODE_ENV=test mocha -r ts-node/register src/tests/**/*.test.ts --exit",
     "start": "node dist/bin/http.js",
     "compile": "rm -rf dist && tsc",
-    "dev": "tsnd --respawn --no-notify --clear src/bin/http.ts"
+    "dev": "tsnd --respawn --no-notify --clear src/bin/http.ts",
+    "deploy": "npm run compile && pm2 start dist/bin/http.js --watch && pm2 start dist/bin/https.js --watch",
+    "redeploy": "pm2 delete all && git pull origin master && npm run deploy"
   },
   "repository": {
     "type": "git",
